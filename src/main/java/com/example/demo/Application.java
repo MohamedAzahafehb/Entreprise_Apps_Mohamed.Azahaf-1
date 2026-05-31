@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //COMMENT: db werd niet gemigrate, na het toevoegen van de volgende twee lijnen werkt goed
 @EnableJpaRepositories("repository")
 @EntityScan("model")
+//tst
 public class Application {
 
 	public static void main(String[] args) {
