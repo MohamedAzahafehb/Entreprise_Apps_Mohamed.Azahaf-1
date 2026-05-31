@@ -1,4 +1,4 @@
-package model;
+package com.example.demo.model;
 
 import java.time.LocalDateTime;
 
@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Evenement {
@@ -18,15 +20,25 @@ public class Evenement {
 	private LocalDateTime tijdstip;
 	private String titel;
 	private String omschrijving;
-	private String Organisatie;
-	public Evenement(LocalDateTime tijdstip, String titel, String omschrijving, String organisatie, String mailadres) {
+	private String organisatie;
+	private String mailadres;
+	
+	//https://jakarta.ee/specifications/persistence/4.0/apidocs/jakarta.persistence/jakarta/persistence/manytoone
+	//https://jakarta.ee/specifications/persistence/4.0/apidocs/jakarta.persistence/jakarta/persistence/joincolumn
+	@ManyToOne
+	@JoinColumn(name = "locatieId")
+	private Locatie locatie;
+	
+	public Evenement() {};
+	
+	public Evenement(LocalDateTime tijdstip, String titel, String omschrijving, String organisatie, String mailadres, Locatie locatie) {
 		setMailadres(mailadres);
 		setOmschrijving(omschrijving);
 		setOrganisatie(organisatie);
 		setTijdstip(tijdstip);
 		setTitel(titel);
+		setLocatie(locatie);
 	}
-	private String mailadres;
 	
 	public LocalDateTime getTijdstip() {
 		return tijdstip;
@@ -47,10 +59,10 @@ public class Evenement {
 		this.omschrijving = omschrijving;
 	}
 	public String getOrganisatie() {
-		return Organisatie;
+		return organisatie;
 	}
 	private void setOrganisatie(String organisatie) {
-		Organisatie = organisatie;
+		this.organisatie = organisatie;
 	}
 	public String getMailadres() {
 		return mailadres;
@@ -60,5 +72,13 @@ public class Evenement {
 	}
 	public long getId() {
 		return id;
+	}
+	
+	public Locatie getLocatie() {
+		return locatie;
+	}
+	
+	private void setLocatie(Locatie locatie) {
+		this.locatie = locatie;
 	}
 }
