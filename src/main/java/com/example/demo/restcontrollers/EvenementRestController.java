@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.restcontrollers;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ import com.example.demo.service.EvenementService;
 
 @RestController
 @RequestMapping("/api")
-public class EvenementController {
+public class EvenementRestController {
 
 	private final EvenementService service;
 	
-	public EvenementController(EvenementService service) {
+	public EvenementRestController(EvenementService service) {
 		this.service = service;
 	}
 	
