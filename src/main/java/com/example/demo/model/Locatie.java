@@ -17,18 +17,12 @@ public class Locatie {
 	private int capaciteit;
 	
 	public Locatie() {};
-	
-	public Locatie(String naam, String adres, int capaciteit) {
-		setNaam(naam);
-		setAdres(adres);
-		setCapaciteit(capaciteit);
-	}
 
 	public String getNaam() {
 		return naam;
 	}
 
-	private void setNaam(String naam) {
+	public void setNaam(String naam) {
 		this.naam = naam;
 	}
 
@@ -36,7 +30,7 @@ public class Locatie {
 		return adres;
 	}
 
-	private void setAdres(String adres) {
+	public void setAdres(String adres) {
 		this.adres = adres;
 	}
 
@@ -44,7 +38,7 @@ public class Locatie {
 		return capaciteit;
 	}
 
-	private void setCapaciteit(int capaciteit) {
+	public void setCapaciteit(int capaciteit) {
 		this.capaciteit = capaciteit;
 	}
 

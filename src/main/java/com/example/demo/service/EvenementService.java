@@ -24,19 +24,54 @@ public class EvenementService {
 		this.locatieRepo = locatieRepo;
 	}
 	
+	public List<EvenementResponse> getAllEvenements(){
+		return evenementRepo.findAll().stream().map(e -> new EvenementResponse(
+			e.getId(),
+			e.getTijdstip(),
+			e.getTitel(),
+			e.getOmschrijving(),
+			e.getOrganisatie(),
+			e.getMailadres(),
+			e.getLocatie()
+		)).toList();
+	}
+
+	public EvenementResponse getEvenementDetails(Long id) {
+		return evenementRepo.findById(id).map(e -> new EvenementResponse(
+			e.getId(),
+			e.getTijdstip(),
+			e.getTitel(),
+			e.getOmschrijving(),
+			e.getOrganisatie(),
+			e.getMailadres(),
+			e.getLocatie()
+		))
+		.orElseThrow(); // als niet gevonden: throw NoSuchElementException //chatgpt
+	}
+	
 	public EvenementResponse registerEvenement(EvenementRequest request) {
-		
-		//TODO: validatie wat als locatie niet bestaat
+		return putEnPostHulp(new Evenement(), request);
+	}
+	
+	public EvenementResponse updateEvenement(Long id, EvenementRequest request) {
+		return putEnPostHulp(evenementRepo.findById(id).orElseThrow(), request);
+	}
+
+	public String deleteEvenement(Long id) {
+		evenementRepo.deleteById(id);
+		return String.format("Evenement %d is succesvol verwijderd", id);
+	}
+	
+	//hulpmethode omdat ik zeg dat Post en Put grotendeels hetzelfde is
+	private EvenementResponse putEnPostHulp(Evenement entity, EvenementRequest request) {
+		//TODO: validatie als locatie niet bestaat
 		Locatie locatie = locatieRepo.findById(request.locatieId()).get();
-		
-		Evenement entity = new Evenement(
-			request.tijdstip(),
-			request.titel(),
-			request.omschrijving(),
-			request.organisatie(),
-			request.mailadres(),
-			locatie
-		);
+		entity.setTijdstip(request.tijdstip());
+		entity.setTitel(request.titel());
+		entity.setOmschrijving(request.omschrijving());
+		entity.setOrganisatie(request.organisatie());
+		entity.setMailadres(request.mailadres());
+		entity.setLocatie(locatie);
 		
 		Evenement saved = evenementRepo.save(entity);
 		
@@ -49,17 +84,5 @@ public class EvenementService {
 			saved.getMailadres(),
 			saved.getLocatie()
 		);
-	}
-	
-	public List<EvenementResponse> getAllEvenements(){
-		return evenementRepo.findAll().stream().map(e -> new EvenementResponse(
-			e.getId(),
-			e.getTijdstip(),
-			e.getTitel(),
-			e.getOmschrijving(),
-			e.getOrganisatie(),
-			e.getMailadres(),
-			e.getLocatie()
-		)).toList();
 	}
 }

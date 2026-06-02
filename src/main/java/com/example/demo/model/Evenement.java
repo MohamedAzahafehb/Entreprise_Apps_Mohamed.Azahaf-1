@@ -31,43 +31,34 @@ public class Evenement {
 	
 	public Evenement() {};
 	
-	public Evenement(LocalDateTime tijdstip, String titel, String omschrijving, String organisatie, String mailadres, Locatie locatie) {
-		setMailadres(mailadres);
-		setOmschrijving(omschrijving);
-		setOrganisatie(organisatie);
-		setTijdstip(tijdstip);
-		setTitel(titel);
-		setLocatie(locatie);
-	}
-	
 	public LocalDateTime getTijdstip() {
 		return tijdstip;
 	}
-	private void setTijdstip(LocalDateTime tijdstip) {
+	public void setTijdstip(LocalDateTime tijdstip) {
 		this.tijdstip = tijdstip;
 	}
 	public String getTitel() {
 		return titel;
 	}
-	private void setTitel(String titel) {
+	public void setTitel(String titel) {
 		this.titel = titel;
 	}
 	public String getOmschrijving() {
 		return omschrijving;
 	}
-	private void setOmschrijving(String omschrijving) {
+	public void setOmschrijving(String omschrijving) {
 		this.omschrijving = omschrijving;
 	}
 	public String getOrganisatie() {
 		return organisatie;
 	}
-	private void setOrganisatie(String organisatie) {
+	public void setOrganisatie(String organisatie) {
 		this.organisatie = organisatie;
 	}
 	public String getMailadres() {
 		return mailadres;
 	}
-	private void setMailadres(String mailadres) {
+	public void setMailadres(String mailadres) {
 		this.mailadres = mailadres;
 	}
 	public long getId() {
@@ -78,7 +69,7 @@ public class Evenement {
 		return locatie;
 	}
 	
-	private void setLocatie(Locatie locatie) {
+	public void setLocatie(Locatie locatie) {
 		this.locatie = locatie;
 	}
 }
