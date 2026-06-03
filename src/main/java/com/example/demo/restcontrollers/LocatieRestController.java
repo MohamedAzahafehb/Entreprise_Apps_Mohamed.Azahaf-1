@@ -28,31 +28,31 @@ public class LocatieRestController {
 	
 	@GetMapping("/locatie")
 	@ResponseStatus(HttpStatus.OK)
-	public List<LocatieResponse> getAllEvenements(){
+	public List<LocatieResponse> getAllLocaties(){
 		return service.getAllLocaties();
 	}
 	
 	@GetMapping("/locatie/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public LocatieResponse getEvenementDetails(@PathVariable Long id){
+	public LocatieResponse getLocatieDetails(@PathVariable Long id){
 		return service.getLocatieDetails(id);
 	}
 	
 	@PutMapping("/locatie/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public LocatieResponse updateEvenement(@PathVariable Long id, @RequestBody LocatieRequest request) {
+	public LocatieResponse updateLocatie(@PathVariable Long id, @RequestBody LocatieRequest request) {
 		return service.updateLocatie(id, request);
 	}
 	
 	@PostMapping("/locatie")
 	@ResponseStatus(HttpStatus.CREATED)
-	public LocatieResponse registerEvenement(@RequestBody LocatieRequest request) {
+	public LocatieResponse registerLocatie(@RequestBody LocatieRequest request) {
 		return service.registerLocatie(request);
 	}
 	
 	@DeleteMapping("/locatie/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public String deleteEvenement(@PathVariable Long id) {
+	public String deleteLocatie(@PathVariable Long id) {
 		return service.deleteLocatie(id);
 	}
 }

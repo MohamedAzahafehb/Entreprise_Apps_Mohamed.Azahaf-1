@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nieuw Evenement</title>
+</head>
+<body>
+
+<h1>Nieuw Evenement</h1>
+
+<form th:action="@{/New}" method="post">
+
+<div>
+    <label for="titel">Titel</label>
+    <input type="text" id="titel" name="titel" required>
+</div>
+
+<br>
+
+<div>
+    <label for="tijdstip">Tijdstip</label>
+    <input type="datetime-local" id="tijdstip" name="tijdstip" required>
+</div>
+
+<br>
+
+<div>
+    <label for="omschrijving">Omschrijving</label>
+    <textarea id="omschrijving" name="omschrijving"></textarea>
+</div>
+
+<br>
+
+<div>
+    <label for="organisatie">Organisatie</label>
+    <input type="text" id="organisatie" name="organisatie">
+</div>
+
+<br>
+
+<div>
+    <label for="mailadres">Mailadres</label>
+    <input type="email" id="mailadres" name="mailadres">
+</div>
+
+<br>
+
+<div>
+    <label for="locatieId">Locatie</label>
+
+    <select id="locatieId" name="locatieId" required>
+        <option value="">-- Kies een locatie --</option>
+
+        <option
+            th:each="locatie : ${locaties}"
+            th:value="${locatie.id}"
+            th:text="${locatie.naam}">
+        </option>
+    </select>
+</div>
+
+<br>
+
+<a th:href="@{/locatie/new}">
+    Nieuwe locatie toevoegen
+</a>
+
+<br><br>
+
+<button type="submit">
+    Evenement opslaan
+</button>
+</form>
+
+</body>
+</html>
