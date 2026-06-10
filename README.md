@@ -63,6 +63,8 @@ Rechtermuisklik op het project en run as a Spring Boot App
 
 De applicatie start op op: *`http://localhost:8080`*.
 
+Ik heb nog geen seeding voor de applicatie voorzien
+
 ---
 ## Gebruikte Technologieën & Frameworks
 Deze informatie is te vinden in de pom.xml
@@ -92,6 +94,7 @@ Ik heb de mappenstructuur overgenomen van onze lector en mijn hele Rest API hier
 - **Gebruik van mapping**: [Spring Documentation](https://spring.io/guides/gs/handling-form-submission)
 - **Mailtrap gebruiken**: [Send Email in Spring Boot using Gmail SMTP - Tutorial by Mailtrap](https://www.youtube.com/watch?v=_tb2d7RCsmM)
 - **Gebruik van environment variables om privacy van wachtwoorden te garanderen**: [Spring Boot Environment Variables Explained](https://www.youtube.com/watch?v=rQV76dufxz4)
+- **Limeteer de index tot 10 objecten**: [Spring docs](https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.limit-query-result)
 
 ### Gebruik van AI
 #### Antigravity AI Assistent
@@ -102,3 +105,4 @@ Ik heb de mappenstructuur overgenomen van onze lector en mijn hele Rest API hier
 #### ChatGPT
 - In de Service-laag het gebruik maken van de orElseThrow() methode
 - env var gebruiken in de code (EmailService.java)
+- uitleg over de methode findTop10() in de EvenementRepository

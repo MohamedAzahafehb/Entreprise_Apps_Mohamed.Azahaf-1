@@ -10,4 +10,7 @@ public interface EvenementRepository extends JpaRepository<Evenement, Long>  {
 	/* kan ook CrudRepository gebruiken, dan voegt enkele extra methodes toe zoals paginatie, sortering,... (bron: HOGENT lessen)
 	 * maar toch JpaRepository want die CrudRepository returneerd een Iterable en dan kan ik geen stream() gebruiken in de servicelaag*/
 
+	//https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.limit-query-result
+	//Spring Data JPA uses method name parsing
+	List<Evenement> findTop10();
 }

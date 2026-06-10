@@ -26,7 +26,7 @@ public class EvenementService {
 	
 	public List<EvenementResponse> getAllEvenements(){
 		
-		return evenementRepo.findAll().stream().map(e -> new EvenementResponse(
+		return evenementRepo.findTop10().stream().map(e -> new EvenementResponse(
 			e.getId(),
 			e.getTijdstip(),
 			e.getTitel(),
