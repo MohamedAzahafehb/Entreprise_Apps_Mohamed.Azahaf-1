@@ -1,11 +1,108 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::content})}">
 <head>
-<meta charset="UTF-8">
-<title>Evenementen</title>
+    <title>Contact - NGO Anderlecht</title>
 </head>
 <body>
-<h2>Evenementen</h2>
-<p th:text="${evenmentenList}"></p>
+    <div th:fragment="content" class="max-w-4xl mx-auto space-y-6 animate-fade-in">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-8 border border-emerald-100/50 shadow-sm">
+            <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Neem Contact Met Ons Op</h1>
+            <p class="mt-2 text-slate-600 max-w-3xl">Heeft u vragen over onze evenementen, wilt u zich aanmelden als vrijwilliger, of wilt u als partner samenwerken? Stuur ons gerust een bericht.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Left Info Block -->
+            <div class="space-y-6">
+                <div class="bg-slate-900 text-slate-100 p-6 rounded-2xl shadow-md space-y-6">
+                    <h2 class="text-lg font-bold text-white">NGO Hoofdkantoor</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Onze medewerkers staan klaar om al uw vragen te beantwoorden. U kunt ons ook bezoeken op onze hoofdlocatie bij Campus Kaai in Anderlecht.
+                    </p>
+                    
+                    <div class="space-y-4 border-t border-slate-800 pt-6">
+                        <div class="flex items-start space-x-3 text-sm">
+                            <svg class="h-5 w-5 text-emerald-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span>Nijverheidskaai 170<br>1070 Anderlecht</span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3 text-sm">
+                            <svg class="h-5 w-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span>info@ngo-anderlecht.be</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Form Block -->
+            <div class="md:col-span-2 space-y-6">
+                <!-- Success Alert -->
+                <div th:if="${mailSuccess}" class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-xl">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-semibold text-emerald-800" th:text="${mailSuccess}"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning Alert (Simulated fallback) -->
+                <div th:if="${mailWarning}" class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-semibold text-amber-800" th:text="${mailWarning}"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Card -->
+                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8">
+                    <form th:action="@{/Contact}" method="post" class="space-y-6">
+                        <!-- Subject Field -->
+                        <div>
+                            <label for="subject" class="block text-sm font-semibold text-slate-700">Onderwerp *</label>
+                            <input type="text" id="subject" name="subject" th:value="${subject}"
+                                   class="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 transition duration-150" 
+                                   placeholder="Onderwerp van uw bericht" required>
+                            <p th:if="${err_subject}" class="mt-1 text-xs font-semibold text-red-600" th:text="${err_subject}"></p>
+                        </div>
+
+                        <!-- Message Field -->
+                        <div>
+                            <label for="message" class="block text-sm font-semibold text-slate-700">Bericht *</label>
+                            <textarea id="message" name="message" th:text="${message}" rows="5"
+                                      class="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 transition duration-150" 
+                                      placeholder="Schrijf hier uw bericht..." required></textarea>
+                            <p th:if="${err_message}" class="mt-1 text-xs font-semibold text-red-600" th:text="${err_message}"></p>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="flex justify-end pt-2">
+                            <button type="submit" class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-700 hover:to-teal-600 text-white font-semibold rounded-xl transition duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 space-x-2">
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                                <span>Bericht Verzenden</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.EvenementRequest;
 import com.example.demo.dto.EvenementResponse;
+import com.example.demo.service.EmailService;
 import com.example.demo.service.EvenementService;
 
 @RestController
@@ -22,10 +23,19 @@ import com.example.demo.service.EvenementService;
 public class EvenementRestController {
 
 	private final EvenementService service;
+	private final EmailService mailservice;
 	
-	public EvenementRestController(EvenementService service) {
+	public EvenementRestController(EvenementService service, EmailService mailservice) {
 		this.service = service;
+		this.mailservice = mailservice;
 	}
+	
+	@RequestMapping("/send-test-email")
+	public String sendTestEmail() {
+		mailservice.sendEmail("testmail", "this is a test email message!");
+		return "mail is sent";
+	}
+	
 	
 	@GetMapping("/evenement")
 	@ResponseStatus(HttpStatus.OK)

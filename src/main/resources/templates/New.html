@@ -1,76 +1,114 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::content})}">
 <head>
-    <meta charset="UTF-8">
-    <title>Nieuw Evenement</title>
+    <title>Nieuw Evenement - NGO Anderlecht</title>
 </head>
 <body>
+    <div th:fragment="content" class="max-w-2xl mx-auto space-y-6 animate-fade-in">
+        <!-- Breadcrumb / Header -->
+        <div>
+            <a th:href="@{/Index}" class="text-sm font-semibold text-emerald-600 hover:text-emerald-700 flex items-center space-x-1 transition duration-150">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Terug naar Overzicht</span>
+            </a>
+            <h1 class="text-3xl font-bold text-slate-900 mt-2">Nieuw Evenement Aanmaken</h1>
+            <p class="text-slate-500 text-sm mt-1">Vul alle velden hieronder in om een nieuw gemeenschapsevenement te registreren.</p>
+        </div>
 
-<h1>Nieuw Evenement</h1>
+        <!-- General Error Alert -->
+        <div th:if="${err_general}" class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-semibold text-red-800" th:text="${err_general}"></p>
+                </div>
+            </div>
+        </div>
 
-<form th:action="@{/New}" method="post">
+        <!-- Event Form Card -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8">
+            <form th:action="@{/New}" method="post" class="space-y-6">
+                <!-- Title Field -->
+                <div>
+                    <label for="titel" class="block text-sm font-semibold text-slate-700">Titel Evenement *</label>
+                    <input type="text" id="titel" name="titel" th:value="${evenement?.titel}" 
+                           class="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 transition duration-150" 
+                           placeholder="Bijv. Voedselbedeling Campus Kaai" required>
+                    <p th:if="${err_titel}" class="mt-1 text-xs font-semibold text-red-600" th:text="${err_titel}"></p>
+                </div>
 
-<div>
-    <label for="titel">Titel</label>
-    <input type="text" id="titel" name="titel" required>
-</div>
+                <!-- DateTime Field -->
+                <div>
+                    <label for="tijdstip" class="block text-sm font-semibold text-slate-700">Tijdstip *</label>
+                    <input type="datetime-local" id="tijdstip" name="tijdstip" th:value="${evenement?.tijdstip}" 
+                           class="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 transition duration-150" required>
+                    <p th:if="${err_tijdstip}" class="mt-1 text-xs font-semibold text-red-600" th:text="${err_tijdstip}"></p>
+                </div>
 
-<br>
+                <!-- Description Field -->
+                <div>
+                    <label for="omschrijving" class="block text-sm font-semibold text-slate-700">Omschrijving *</label>
+                    <textarea id="omschrijving" name="omschrijving" th:text="${evenement?.omschrijving}" rows="4" 
+                              class="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 transition duration-150" 
+                              placeholder="Beschrijf hier de inhoud en het doel van het evenement..." required></textarea>
+                    <p th:if="${err_omschrijving}" class="mt-1 text-xs font-semibold text-red-600" th:text="${err_omschrijving}"></p>
+                </div>
 
-<div>
-    <label for="tijdstip">Tijdstip</label>
-    <input type="datetime-local" id="tijdstip" name="tijdstip" required>
-</div>
+                <!-- Organisation Field -->
+                <div>
+                    <label for="organisatie" class="block text-sm font-semibold text-slate-700">Organisatie / Partnernaam *</label>
+                    <input type="text" id="organisatie" name="organisatie" th:value="${evenement?.organisatie}" 
+                           class="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 transition duration-150" 
+                           placeholder="Bijv. NGO Anderlecht of partnernaam" required>
+                    <p th:if="${err_organisatie}" class="mt-1 text-xs font-semibold text-red-600" th:text="${err_organisatie}"></p>
+                </div>
 
-<br>
+                <!-- Contact Email Field -->
+                <div>
+                    <label for="mailadres" class="block text-sm font-semibold text-slate-700">Mail Contactpersoon *</label>
+                    <input type="email" id="mailadres" name="mailadres" th:value="${evenement?.mailadres}" 
+                           class="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 transition duration-150" 
+                           placeholder="bijvoorbeeld@ngo.be" required>
+                    <p th:if="${err_mailadres}" class="mt-1 text-xs font-semibold text-red-600" th:text="${err_mailadres}"></p>
+                </div>
 
-<div>
-    <label for="omschrijving">Omschrijving</label>
-    <textarea id="omschrijving" name="omschrijving"></textarea>
-</div>
+                <!-- Location Selector Field -->
+                <div>
+                    <div class="flex justify-between items-center">
+                        <label for="locatieId" class="block text-sm font-semibold text-slate-700">Locatie *</label>
+                        <a th:href="@{/locatie/new}" class="text-xs font-bold text-emerald-600 hover:text-emerald-700 transition duration-150">
+                            + Nieuwe locatie toevoegen
+                        </a>
+                    </div>
+                    <select id="locatieId" name="locatieId" 
+                            class="mt-1 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/25 transition duration-150 bg-white" required>
+                        <option value="">-- Kies een locatie --</option>
+                        <option th:each="locatie : ${locaties}"
+                                th:value="${locatie.id}"
+                                th:text="${locatie.naam}"
+                                th:selected="${locatie.id == evenement?.locatie?.id}">
+                        </option>
+                    </select>
+                    <p th:if="${err_locatieId}" class="mt-1 text-xs font-semibold text-red-600" th:text="${err_locatieId}"></p>
+                </div>
 
-<br>
-
-<div>
-    <label for="organisatie">Organisatie</label>
-    <input type="text" id="organisatie" name="organisatie">
-</div>
-
-<br>
-
-<div>
-    <label for="mailadres">Mailadres</label>
-    <input type="email" id="mailadres" name="mailadres">
-</div>
-
-<br>
-
-<div>
-    <label for="locatieId">Locatie</label>
-
-    <select id="locatieId" name="locatieId" required>
-        <option value="">-- Kies een locatie --</option>
-
-        <option
-            th:each="locatie : ${locaties}"
-            th:value="${locatie.id}"
-            th:text="${locatie.naam}">
-        </option>
-    </select>
-</div>
-
-<br>
-
-<a th:href="@{/locatie/new}">
-    Nieuwe locatie toevoegen
-</a>
-
-<br><br>
-
-<button type="submit">
-    Evenement opslaan
-</button>
-</form>
-
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row sm:justify-end gap-3 pt-4 border-t border-slate-100">
+                    <a th:href="@{/Index}" class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition duration-200 text-center">
+                        Annuleren
+                    </a>
+                    <button type="submit" class="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-700 hover:to-teal-600 text-white font-semibold rounded-xl transition duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        Evenement Opslaan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

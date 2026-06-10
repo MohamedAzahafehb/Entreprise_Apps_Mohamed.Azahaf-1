@@ -1,11 +1,79 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::content})}">
 <head>
-<meta charset="UTF-8">
-<title>Evenementen</title>
+    <title>Over Ons - NGO Anderlecht</title>
 </head>
 <body>
-<h2>Evenementen</h2>
-<p th:text="${evenmentenList}"></p>
+    <div th:fragment="content" class="max-w-4xl mx-auto space-y-8 animate-fade-in">
+        <!-- Page Title -->
+        <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-8 border border-emerald-100/50 shadow-sm">
+            <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Over NGO Anderlecht</h1>
+            <p class="mt-2 text-slate-600 max-w-3xl">Bouwen aan gemeenschap, verbinding en ondersteuning voor iedereen in Anderlecht.</p>
+        </div>
+
+        <!-- Info Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Left 2/3: Description & Mission -->
+            <div class="md:col-span-2 space-y-6">
+                <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-4">
+                    <h2 class="text-xl font-bold text-slate-950">Onze Missie</h2>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        NGO Anderlecht is een dynamische organisatie die zich inzet voor gemeenschapsopbouw en directe ondersteuning van kwetsbare groepen in de buurt. Wij geloven dat een sterke buurt begint bij verbinding en wederzijdse hulp. Door het organiseren van laagdrempelige activiteiten brengen we bewoners van diverse achtergronden samen.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed text-sm">
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Onze werking steunt volledig op enthousiaste vrijwilligers en gulle partners uit de regio Anderlecht en Brussel.
+                    </p>
+                </div>
+
+                <!-- Core Values -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-emerald-50/50 border border-emerald-100/50 p-5 rounded-xl">
+                        <h3 class="font-bold text-emerald-800 text-sm">Gemeenschapszin</h3>
+                        <p class="text-xs text-emerald-900/80 mt-1">Samenwerken aan een buurt waar iedereen zich thuis en gesteund voelt.</p>
+                    </div>
+                    <div class="bg-teal-50/50 border border-teal-100/50 p-5 rounded-xl">
+                        <h3 class="font-bold text-teal-800 text-sm">Toegankelijkheid</h3>
+                        <p class="text-xs text-teal-900/80 mt-1">Al onze evenementen en hulpverleningen zijn volledig gratis en voor iedereen open.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right 1/3: Contact & Address Card -->
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 space-y-6">
+                <h2 class="text-lg font-bold text-slate-950 border-b border-slate-100 pb-3">Contactgegevens</h2>
+
+                <div class="space-y-4">
+                    <!-- Address -->
+                    <div class="space-y-1">
+                        <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Adres Hoofdkantoor</span>
+                        <p class="text-sm text-slate-700 font-medium">Nijverheidskaai 170<br>1070 Anderlecht</p>
+                        <span class="inline-flex items-center text-xs text-slate-400">(Campus Kaai)</span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="space-y-1">
+                        <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">E-mail</span>
+                        <a href="mailto:info@ngo-anderlecht.be" class="text-sm font-semibold text-emerald-600 hover:underline">info@ngo-anderlecht.be</a>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="space-y-1">
+                        <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Telefoon</span>
+                        <span class="text-sm text-slate-700 font-medium">+32 (0)2 123 45 67</span>
+                    </div>
+                    
+                    <!-- Hours -->
+                    <div class="space-y-1 border-t border-slate-100 pt-4">
+                        <span class="block text-xs font-semibold text-slate-400 uppercase tracking-wider">Openingstijden</span>
+                        <p class="text-xs text-slate-600">Maandag - Vrijdag: 09:00 - 17:00</p>
+                        <p class="text-xs text-slate-600">Zaterdag - Zondag: Gesloten</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -12,7 +12,6 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Evenement {
 
-	//TODO: leg annotations uit in eigen woorden! gekopieerd van repo docent
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;

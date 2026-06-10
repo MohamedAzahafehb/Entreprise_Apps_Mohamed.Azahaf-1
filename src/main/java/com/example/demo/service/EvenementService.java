@@ -15,7 +15,7 @@ import com.example.demo.repository.LocatieRepository;
 @Service
 public class EvenementService {
 
-	//wrm final?
+
 	private final EvenementRepository evenementRepo;
 	private final LocatieRepository locatieRepo;
 	
@@ -25,6 +25,7 @@ public class EvenementService {
 	}
 	
 	public List<EvenementResponse> getAllEvenements(){
+		
 		return evenementRepo.findAll().stream().map(e -> new EvenementResponse(
 			e.getId(),
 			e.getTijdstip(),
@@ -33,7 +34,7 @@ public class EvenementService {
 			e.getOrganisatie(),
 			e.getMailadres(),
 			e.getLocatie()
-		)).toList();
+		)).toList();		
 	}
 
 	public EvenementResponse getEvenementDetails(Long id) {

@@ -1,11 +1,70 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout(~{::title}, ~{::content})}">
 <head>
-<meta charset="UTF-8">
-<title>Evenementen</title>
+    <title>Overzicht Evenementen - NGO Anderlecht</title>
 </head>
 <body>
-<h2>Evenementen</h2>
-<p th:text="${evenmentenList}"></p>
+    <div th:fragment="content" class="space-y-8 animate-fade-in">
+        <!-- Hero section / Page Header -->
+        <div class="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl p-8 border border-emerald-100/50 shadow-sm">
+            <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Onze Recente Evenementen</h1>
+            <p class="mt-2 text-slate-600 max-w-3xl">Hieronder vindt u een overzicht van de 10 meest recent geplande activiteiten. Samen bouwen we aan een sterker en warmer Anderlecht. Klik op de details om meer te lezen over de locatie en capaciteit.</p>
+        </div>
+
+        <!-- Table of events -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Titel Evenement</th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Organisatie</th>
+                            <th scope="col" class="px-6 py-4 class text-center text-xs font-semibold text-slate-500 uppercase tracking-wider">Acties</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white">
+                        <!-- Iteration over evenementen -->
+                        <tr th:each="evenement : ${evenmentenList}" class="hover:bg-slate-50/80 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-semibold text-slate-900" th:text="${evenement.titel}">Evenement Titel</div>
+                                <div class="text-xs text-slate-400 mt-0.5" th:text="${#temporals.format(evenement.tijdstip, 'dd MMMM yyyy, HH:mm')}">Datum & Tijd</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100/50" th:text="${evenement.organisatie}">
+                                    Organisatie
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                <a th:href="@{/Details(id=${evenement.id})}" class="inline-flex items-center px-4 py-2 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 font-semibold rounded-lg text-xs transition duration-200 shadow-sm hover:shadow">
+                                    Details Bekijken
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- If list is empty -->
+                        <tr th:if="${#lists.isEmpty(evenmentenList)}">
+                            <td colspan="3" class="px-6 py-10 text-center text-slate-500">
+                                <div class="flex flex-col items-center justify-center space-y-2">
+                                    <svg class="h-10 w-10 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <p class="font-medium">Er zijn nog geen evenementen geregistreerd.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Add Event Button -->
+        <div class="flex justify-end pt-2">
+            <a th:href="@{/New}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-700 hover:to-teal-600 text-white font-semibold rounded-xl transition duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 space-x-2">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Nieuw Evenement Toevoegen</span>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
