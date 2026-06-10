@@ -12,5 +12,5 @@ public interface EvenementRepository extends JpaRepository<Evenement, Long>  {
 
 	//https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.limit-query-result
 	//Spring Data JPA uses method name parsing
-	List<Evenement> findTop10();
+	List<Evenement> findTop10By();
 }

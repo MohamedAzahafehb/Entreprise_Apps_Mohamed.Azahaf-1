@@ -46,7 +46,7 @@ spring.datasource.password=root
 ### 4. Mailserver configuratie
 Om e-mails daadwerkelijk te versturen, voeg je jouw mail-gegevens toe in de properties.
 
-Ik maak gebruik van Outlook, als u een andere wenst te gebruiken moet u hiervoor de correcte in te vullen gegevens opzoeken
+Gebruik hierbij liefst uw schoolmailadres, [zie hier waarom](#antigravity-ai-over-mailserver-configuratie).
 ```properties
 spring.mail.host=smtp-mail.outlook.com
 spring.mail.port=587
@@ -97,12 +97,35 @@ Ik heb de mappenstructuur overgenomen van onze lector en mijn hele Rest API hier
 - **Limeteer de index tot 10 objecten**: [Spring docs](https://docs.spring.io/spring-data/jpa/reference/repositories/query-methods-details.html#repositories.limit-query-result)
 
 ### Gebruik van AI
+#### ChatGPT
+- In de Service-laag het gebruik maken van de orElseThrow() methode
+- env var gebruiken in de code (EmailService.java)
+- uitleg over de methode findTop10By() in de EvenementRepository
+
 #### Antigravity AI Assistent
 - Form validation op Niew Evenement, zelfde werkwijze hergebruikt voor Nieuwe Locatie
 - De hele frontend, Alle Views
 - De structuur van deze ReadMe (Gebruik van titels en codeblokken, inhoudstafel)
+##### Antigravity AI over Mailserver configuratie
+mijn prompt:
+```
+raar, als ik mijn schoolmail doe werkt het, maar als ik mijn persoonlijke mail doe geeft hij mij die error?
+```
 
-#### ChatGPT
-- In de Service-laag het gebruik maken van de orElseThrow() methode
-- env var gebruiken in de code (EmailService.java)
-- uitleg over de methode findTop10() in de EvenementRepository
+zijn reactie:
+```
+Dat is inderdaad een bekend verschil! Dit komt door de manier waarop Microsoft de beveiliging voor verschillende soorten accounts afhandelt:
+
+1. Persoonlijke accounts (@hotmail.com, @outlook.com)
+Microsoft heeft Basic Authentication (inloggen met een traditioneel wachtwoord via SMTP) volledig en definitief uitgeschakeld voor alle persoonlijke/consumenten-accounts. Er is geen uitzondering mogelijk; je kunt hier alleen nog mail sturen via SMTP als je een App-wachtwoord aanmaakt of OAuth2 gebruikt.
+
+2. School- of bedrijfsaccounts (@student.ehb.be)
+Voor school- en zakelijke Microsoft 365-omgevingen ligt het beheer bij de IT-afdeling van de school.
+
+De IT-beheerders van de Erasmushogeschool Brussel hebben SMTP Basic Authentication (SMTP AUTH) (voorlopig) geactiveerd of toegestaan voor studenten-accounts.
+Hierdoor staat de server toe dat jouw applicatie met je gewone school-wachtwoord inlogt.
+Conclusie
+Als je jouw schoolmail gebruikt, omzeil je de blokkade omdat de school-IT deze legacy-koppeling toestaat. Voor je persoonlijke mail weigert Microsoft dit om veiligheidsredenen.
+
+Je kunt voor je project dus gerust je schoolmail blijven gebruiken (aangezien dat werkt), of overstappen naar Mailtrap om te testen zonder dat je echte mails verstuurt!
+```
