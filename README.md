@@ -44,7 +44,8 @@ spring.datasource.password=root
 *En als u een andere naam of poort heeft gekozen voor uw Database, vul die in in plaats van 3306/ngo_anderlecht*
 
 ### 4. Mailserver configuratie
-Om e-mails daadwerkelijk te versturen naar je Mailtrap inbox, voeg je jouw mail-gegevens toe in `src/main/resources/application.properties`:
+Om e-mails daadwerkelijk te versturen, voeg je jouw mail-gegevens toe in de properties.
+
 Ik maak gebruik van Outlook, als u een andere wenst te gebruiken moet u hiervoor de correcte in te vullen gegevens opzoeken
 ```properties
 spring.mail.host=smtp-mail.outlook.com
@@ -54,7 +55,7 @@ spring.mail.password=wachtwoord123!
 ```
 *Uiteraard vult u uw eigen mailadres en wachtwoord in*
 
-*Ik maak gebruik van Environment Variables zodat mijn gegevens niet in deze repository komen vij het pushen*
+*Ik maak gebruik van Environment Variables zodat mijn gegevens niet in deze repository komen bij het pushen*
 
 
 ### 5. Applicatie Starten
@@ -65,6 +66,7 @@ De applicatie start op op: *`http://localhost:8080`*.
 ---
 ## Gebruikte Technologieën & Frameworks
 Deze informatie is te vinden in de pom.xml
+
 Belangrijke Technologieën en Frameworks zijn:
 - Spring 4.0.6
 - Java 25
@@ -74,7 +76,7 @@ Spring Starters:
 - Thymeleaf
 - JDBC API
 - Spring Data JPA
-- MYSQL Driver (mijn eigen keuze omdat ik er beter in vertrouwd ben)
+- MYSQL Driver (mijn eigen keuze omdat ik er beter mee vertrouwd ben)
 - Spring Web
 - Spring Mail
 
